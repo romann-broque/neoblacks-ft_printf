@@ -6,7 +6,7 @@
 /*   By: amugnier <amugnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 15:20:24 by amugnier          #+#    #+#             */
-/*   Updated: 2022/11/27 13:34:58 by amugnier         ###   ########.fr       */
+/*   Updated: 2022/11/28 18:41:16 by amugnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,15 +32,15 @@ int	ft_printf_args(const char *format, int i, va_list ap)
 			return (ft_put_hex(va_arg(ap, unsigned int), "0123456789abcdef"));
 	}
 	else if (format[i + 1] == 'p')
-		return (ft_putstring("0x") + ft_put_pointer(va_arg(ap, void *), \
+		return (ft_put_pointer(va_arg(ap, void *), \
 		"0123456789abcdef"));
 	else
 		return (0);
 }
 
-int ft_printf(const char *format, ...)
+int	ft_printf(const char *format, ...)
 {
-	va_list ap;
+	va_list	ap;
 	int		i;
 	int		ret;
 
@@ -49,13 +49,13 @@ int ft_printf(const char *format, ...)
 	va_start(ap, format);
 	while (format[i] != '\0')
 	{
-		if (format[i] == '%')
+		if (format[i] == '%' && ft_strchr("cspdiuxX%", format[i + 1]))
 		{
-			ret = ft_printf_args(&format[i + 1], i, ap);
+			ret += ft_printf_args(format, i, ap);
 			i++;
 		}
 		else
-			ret = ft_putcharacter(format[i]);
+			ret += ft_putcharacter(format[i]);
 		i++;
 	}
 	va_end(ap);

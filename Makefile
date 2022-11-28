@@ -6,11 +6,14 @@
 #    By: amugnier <amugnier@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/27 13:28:37 by amugnier          #+#    #+#              #
-#    Updated: 2022/11/27 13:34:32 by amugnier         ###   ########.fr        #
+#    Updated: 2022/11/28 15:54:55 by amugnier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libftprintf.a
+
+PATH_LIB = libft/
+LIBFT = $(PATH_LIB)/libft.a
 
 FOLDER = srcs/
 
@@ -26,20 +29,28 @@ CFLAGS = -Wall -Wextra -Werror
 
 RM = rm -f
 
+all: $(LIBFT) $(NAME)
+
+$(NAME): $(OBJS)
+	cp $(LIBFT) $(NAME)
+	ar rc $(NAME) $(OBJS)
+
 .c.o:
 	$(CC) $(CFLAGS) -c $< -o $(<:.c=.o)
 
-$(NAME): $(OBJS)
-	ar rc $(NAME) $(OBJS)
-
-all: $(NAME)
+$(LIBFT):
+	$(MAKE) -C $(PATH_LIB)
 
 clean:
+	$(MAKE) -C $(PATH_LIB) clean
 	$(RM) $(OBJS)
 
 fclean: clean
+	$(MAKE) -C $(PATH_LIB) fclean
 	$(RM) $(NAME)
 
-re: fclean all
+re: fclean
+	$(MAKE) -C $(PATH_LIB) re
+	$(MAKE)
 
 .PHONY: all clean fclean re

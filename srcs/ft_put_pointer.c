@@ -6,12 +6,17 @@
 /*   By: amugnier <amugnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 16:16:52 by amugnier          #+#    #+#             */
-/*   Updated: 2022/11/27 13:35:14 by amugnier         ###   ########.fr       */
+/*   Updated: 2022/11/28 18:43:45 by amugnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
+#include <stdio.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
 
+// Function to convert a number an hexadecimal
 int	ft_hexabase(unsigned long nbr)
 {
 	int	i;
@@ -27,6 +32,7 @@ int	ft_hexabase(unsigned long nbr)
 	return (i);
 }
 
+// Function to convert a number an hexadecimal to string
 char	*ft_hextostr(unsigned long nbr, char *base)
 {
 	int		size;
@@ -46,19 +52,33 @@ char	*ft_hextostr(unsigned long nbr, char *base)
 	return (hex);
 }
 
+// Function to print a pointer
 int	ft_put_pointer(void *nbr, char *base)
 {
 	int				lenght;
+	int				fd;
 	char			*str;
 	unsigned long	n;
 
-	n = (unsigned long)nbr;
-	str = ft_hextostr(n, base);
-	lenght = ft_putstring(str);
-	free(str);
-	return (lenght);
+	fd = open("my_input.txt", O_WRONLY | O_APPEND);
+	if (!nbr)
+	{
+		write(fd, "(nil)", 5);
+		return (5);
+	}
+	else
+	{
+		n = (unsigned long)nbr;
+		str = ft_hextostr(n, base);
+		write(fd, "0x", 2);
+		lenght = ft_strlen(str);
+		write(fd, str, lenght);
+		free(str);
+		return (lenght + 2);
+	}
 }
 
+// Function to print a pointer
 int	ft_put_hex(unsigned int nbr, char *base)
 {
 	char	*str;
