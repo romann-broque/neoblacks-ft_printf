@@ -6,7 +6,7 @@
 /*   By: amugnier <amugnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 15:20:24 by amugnier          #+#    #+#             */
-/*   Updated: 2022/11/29 15:25:37 by amugnier         ###   ########.fr       */
+/*   Updated: 2022/11/29 17:00:14 by amugnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,11 +68,9 @@ int	ft_printf(const char *format, ...)
 {
 	va_list ap;
 	int		ret;
-	int		fd;
 
-	fd = open("My_input.txt", O_WRONLY);
 	va_start(ap, format);
-	ret = ft_vdprintf(fd, format, ap);
+	ret = ft_vdprintf(STDOUT_FILENO, format, ap);
 	va_end(ap);
 	return (ret);
 }
