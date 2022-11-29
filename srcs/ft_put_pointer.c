@@ -6,7 +6,7 @@
 /*   By: amugnier <amugnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 16:16:52 by amugnier          #+#    #+#             */
-/*   Updated: 2022/11/29 15:25:50 by amugnier         ###   ########.fr       */
+/*   Updated: 2022/11/29 17:14:59 by amugnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ int	ft_put_pointer(int fd, void *nbr, char *base)
 	char			*str;
 	unsigned long	n;
 
-	fd = open("my_input.txt", O_WRONLY | O_APPEND);
 	if (nbr == NULL)
 		return(write(fd, "(nil)", 5));
 	else
