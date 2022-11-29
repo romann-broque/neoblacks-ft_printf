@@ -6,7 +6,7 @@
 /*   By: amugnier <amugnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 15:34:33 by amugnier          #+#    #+#             */
-/*   Updated: 2022/11/28 20:04:23 by amugnier         ###   ########.fr       */
+/*   Updated: 2022/11/29 15:15:48 by amugnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,53 +18,45 @@
 #include <fcntl.h>
 
 // function to print a char
-int	ft_putcharacter(char c)
+int	ft_putcharacter(int fd, char c)
 {
-	int	fd;
-
-	fd = open("my_input.txt", O_WRONLY | O_APPEND);
 	write(fd, &c, 1);
 	return (1);
 }
 
 // function to print a string
-int	ft_putstring(char *str)
+int	ft_putstring(int fd, char *str)
 {
 	int	i;
-	int	fd;
 
-	fd = open("my_input.txt", O_WRONLY | O_APPEND);
 	i = 0;
 	if (str[i] == '\0')
-	{
-		write(fd, "(null)", 6);
-		return (6);
-	}
+		return(write(fd, "\0", 1));
 	i = ft_strlen(str);
 	write(fd, str, i);
 	return (i);
 }
 
 // function to print a number
-int	ft_putnbr_i(int nbr)
+int	ft_putnbr_i(int fd, int nbr)
 {
 	char	*str;
 	int		len;
 
 	str = ft_itoa(nbr);
-	len = ft_putstring(str);
+	len = ft_putstring(fd,str);
 	free(str);
 	return (len);
 }
 
 // function to print a unsigned number
-int	ft_putnbr_u(unsigned int nbr)
+int	ft_putnbr_u(int fd, unsigned int nbr)
 {
 	char	*str;
 	int		len;
 
 	str = ft_uitoa(nbr);
-	len = ft_putstring(str);
+	len = ft_putstring(fd, str);
 	free(str);
 	return (len);
 }

@@ -6,7 +6,7 @@
 /*   By: amugnier <amugnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 15:40:24 by amugnier          #+#    #+#             */
-/*   Updated: 2022/11/28 20:02:18 by amugnier         ###   ########.fr       */
+/*   Updated: 2022/11/29 15:26:38 by amugnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 int	main(void)
 {
 	int	fd;
+	char myString[10] = "";
 
 	fd = open("test.txt", O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	//test 1 : print a string
@@ -76,6 +77,9 @@ int	main(void)
 	//test 18 ERROR
 	dprintf(fd, "%d\n", 2147483649);
 	ft_printf("%d\n", 2147483649);
+	//test 19 string null
+	dprintf(fd, "%s\n", myString);
+	ft_printf("%s\n", myString);
 
 	return (0);
 }
