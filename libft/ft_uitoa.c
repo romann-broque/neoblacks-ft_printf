@@ -6,15 +6,15 @@
 /*   By: amugnier <amugnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 11:44:19 by amugnier          #+#    #+#             */
-/*   Updated: 2022/11/28 16:52:40 by amugnier         ###   ########.fr       */
+/*   Updated: 2022/11/29 17:47:43 by rbroque          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static size_t	nb_lenght(int nb)
+static size_t	nb_lenght(unsigned int nb)
 {
-	int	len;
+	size_t	len;
 
 	len = 0;
 	if (nb <= 0)

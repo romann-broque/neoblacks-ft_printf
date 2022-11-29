@@ -6,7 +6,7 @@
 #    By: amugnier <amugnier@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/27 13:28:37 by amugnier          #+#    #+#              #
-#    Updated: 2022/11/28 15:54:55 by amugnier         ###   ########.fr        #
+#    Updated: 2022/11/29 17:29:08 by rbroque          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,12 +41,16 @@ $(NAME): $(OBJS)
 $(LIBFT):
 	$(MAKE) -C $(PATH_LIB)
 
+test: all
+	$(MAKE) -C ./tests/
 clean:
 	$(MAKE) -C $(PATH_LIB) clean
+	$(MAKE) -C ./tests/ clean
 	$(RM) $(OBJS)
 
 fclean: clean
 	$(MAKE) -C $(PATH_LIB) fclean
+	$(MAKE) -C ./tests/ fclean
 	$(RM) $(NAME)
 
 re: fclean

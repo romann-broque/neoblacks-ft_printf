@@ -6,7 +6,7 @@
 /*   By: amugnier <amugnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 16:16:52 by amugnier          #+#    #+#             */
-/*   Updated: 2022/11/28 18:43:45 by amugnier         ###   ########.fr       */
+/*   Updated: 2022/11/29 17:14:59 by amugnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,19 +53,14 @@ char	*ft_hextostr(unsigned long nbr, char *base)
 }
 
 // Function to print a pointer
-int	ft_put_pointer(void *nbr, char *base)
+int	ft_put_pointer(int fd, void *nbr, char *base)
 {
 	int				lenght;
-	int				fd;
 	char			*str;
 	unsigned long	n;
 
-	fd = open("my_input.txt", O_WRONLY | O_APPEND);
-	if (!nbr)
-	{
-		write(fd, "(nil)", 5);
-		return (5);
-	}
+	if (nbr == NULL)
+		return(write(fd, "(nil)", 5));
 	else
 	{
 		n = (unsigned long)nbr;
@@ -79,13 +74,13 @@ int	ft_put_pointer(void *nbr, char *base)
 }
 
 // Function to print a pointer
-int	ft_put_hex(unsigned int nbr, char *base)
+int	ft_put_hex(int fd, unsigned int nbr, char *base)
 {
 	char	*str;
 	int		lenght;
 
 	str = ft_hextostr(nbr, base);
-	lenght = ft_putstring(str);
+	lenght = ft_putstring(fd, str);
 	free(str);
 	return (lenght);
 }
